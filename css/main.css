@@ -199,6 +199,19 @@ main{
 	clip-path: polygon(0 0, 0.1% 0, 0.1% 0.1%, 0.1% 0);
 }
 
+/* --------- Page Specific --------- */
+
+/* ----- Home page ----- */
 #home{
   background-color: var(--color-primary-pale);
+}
+
+/* ---- Title Area ---- */
+
+h2 {
+	color: var(--color-primary);
+}
+
+p {
+	color: var(--color-primary-dark);
 }
