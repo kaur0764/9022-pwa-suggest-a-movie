@@ -41,7 +41,7 @@ const APP = {
 			let titleArea = document.querySelector(".titleArea h2");
 			titleArea.innerHTML = `Search Results for <span>'${keyword}'<span>`;
 			IDB.getDBResults("searchStore", keyword, RESULT.getSearchResults);
-			
+
 			//listener for clicking on the movie card container
 			document
 				.querySelector(".contentArea")
@@ -132,7 +132,20 @@ const IDB = {
 	},
 	getDBResults: (storeName, keyValue, callback) => {
 		//return the results from storeName where it matches keyValue
-
+		let tx = IDB.createTransaction(storeName);
+		tx.oncomplete = function () {
+			//done the transaction
+		};
+		let store = tx.objectStore(storeName);
+		let getRequest = store.get(keyValue);
+		getRequest.onsuccess = function (ev) {
+			if (getRequest.result) {
+				APP.results = getRequest.result.results;
+				CARDS.displayCards();
+			} else {
+				if(typeof callback === 'function') callback();
+			}
+		};
 	},
 	addResultsToDB: (obj, storeName, callback) => {
 		//save the obj passed in to the appropriate store
