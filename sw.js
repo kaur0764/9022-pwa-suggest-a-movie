@@ -1,6 +1,6 @@
 const version = 1;
-const staticName = `PWA-Static-Movie-APP-${version}`;
-const dynamicName = `PWA-Dynamic-Movie-APP-${version}`;
+const staticCache = `PWA-Static-Movie-APP-${version}`;
+const dynamicCache = `PWA-Dynamic-Movie-APP-${version}`;
 const cacheLimit = 100;
 const cacheList = [
     "/",

@@ -14,6 +14,14 @@ const APP = {
 	},
 	registerSW: () => {
 		//register the service worker
+		if ("serviceWorker" in navigator) {
+			navigator.serviceWorker.register("/sw.js").catch(function (err) {
+				console.warn(err);
+			});
+			navigator.serviceWorker.ready.then((registration) => {
+				APP.sw = registration.active;
+			});
+		}
 		
 		APP.pageSpecific();
 		APP.addListeners();
