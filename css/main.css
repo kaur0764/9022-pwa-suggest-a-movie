@@ -136,10 +136,16 @@ small {
 /* --------- Main --------- */
 
 main{
-	padding-top: 7rem;
+	padding-top: 8.5rem;
 	position: relative;
 	max-width: 90vw;
 	margin: 0 auto;
+}
+
+@media all and (min-width: 23.5em) {
+	main{
+		padding-top: 7rem;
+	}
 }
 
 /* --------- Search Area --------- */
