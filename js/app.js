@@ -233,6 +233,34 @@ const CARDS = {
 	},
 	displayCards: () => {
 		//display all the movie cards based on the results array
+		let cards = document.querySelector(".contentArea");
+		cards.innerHTML = "";
+		let df= document.createDocumentFragment();
+		APP.results.forEach((result) => {
+			let card = document.createElement("div");
+			let posterPath = result.poster_path;
+			let overview = result.overview;
+			let releaseDate = result.release_date;
+			let popularity = result.popularity;
+			let id = result.id;
+			let title = result.title;
+			let imgSrc = `${APP.tmdbIMAGEBASEURL}${posterPath}`;
+			if (posterPath === null) {
+				imgSrc = "/img/placeholder.png";
+			}
+			card.setAttribute("data-id", id);
+			card.classList.add("card");
+			card.innerHTML = `<img src=${imgSrc}></img>`;
+			let cardBody = document.createElement("div");
+			cardBody.classList.add("card-body");
+			cardBody.innerHTML = `<h3>${title}</h3>
+                          <p>${releaseDate}</p>
+                          <p>Popularity: ${popularity}</p>
+                          <p>${overview}</p>`;
+			card.append(cardBody);
+			df.append(card);
+		});
+		cards.append(df)
 	}
 };
 
