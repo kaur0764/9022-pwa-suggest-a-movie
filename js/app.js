@@ -36,6 +36,8 @@ const APP = {
 		//when online and offline
 		window.addEventListener("online", APP.changeOnlineStatus);
 		window.addEventListener("offline", APP.changeOnlineStatus);
+		//listener for clicking on the movie card container
+		document.querySelector(".contentArea").addEventListener("click", CARDS.cardListClicked);
 	},
 	pageSpecific: () => {
 		if (document.body.id === "home") {
@@ -242,6 +244,11 @@ const RESULT = {
 const CARDS = {
 	cardListClicked: (ev) => {
 		// user clicked on a movie card
+		let card = ev.target.closest(".card");
+		let movieid = card.dataset.id;
+		APP.id = movieid;
+		let title = card.querySelector("h3").innerHTML;
+		APP.navigate(`/suggest.html?movie_id=${movieid}&title=${title}`);
 	},
 	displayCards: () => {
 		//display all the movie cards based on the results array
