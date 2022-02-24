@@ -25,6 +25,17 @@
         <h1>Suggest A Movie</h1>
       </header>
       <main>
+        <section class="searchArea">
+          <form id="searchForm" name="searchForm">
+            <button id="btnSearch" type="submit">
+              <span class="material-icons">search</span> 
+            </button>
+            <input type="search" id="inputSearch" name="inputSearch" value="" placeholder="Search"/>
+					<button id="btnClose" type="button">
+						<span class="material-icons">close</span> 
+					</button>
+          </form>
+        </section>
         <section class="titleArea">
           <!-- messages and page titles -->
         </section>
@@ -32,11 +43,6 @@
           <!-- list would be the list of matching searches OR the movie cards -->
         </section>
       </main>
-      <section class="searchArea">
-        <form id="searchForm" name="searchForm">
-          <input type="search" id="inputSearch" name="inputSearch" value="" />
-        </form>
-      </section>
     </div>
     <script src="./js/app.js" defer></script>
   </body>
