@@ -36,6 +36,16 @@ const APP = {
 		}
 		if (document.body.id === "results") {
 			//on the results page
+			let keyword = location.search.split("=")[1];
+			APP.keyword = keyword;
+			let titleArea = document.querySelector(".titleArea h2");
+			titleArea.innerHTML = `Search Results for <span>'${keyword}'<span>`;
+			IDB.getDBResults("searchStore", keyword, RESULT.getSearchResults);
+			
+			//listener for clicking on the movie card container
+			document
+				.querySelector(".contentArea")
+				.addEventListener("click", CARDS.cardListClicked);
 		}
 		if (document.body.id === "suggest") {
 			//on the suggest page
