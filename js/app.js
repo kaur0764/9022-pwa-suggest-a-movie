@@ -262,7 +262,7 @@ const CARDS = {
 			}
 			card.setAttribute("data-id", id);
 			card.classList.add("card");
-			card.innerHTML = `<img src=${imgSrc}></img>`;
+			card.innerHTML = `<img src=${imgSrc} alt="Poster for movie ${title}"></img>`;
 			let cardBody = document.createElement("div");
 			cardBody.classList.add("card-body");
 			cardBody.innerHTML = `<h3>${title}</h3>
