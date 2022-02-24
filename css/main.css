@@ -84,3 +84,87 @@ small {
 		font-size: 0.833rem;
 	}
 }
+
+/* ----------------- Variables ----------------- */
+
+:root {
+	--color-primary: #4b5c35;
+	--color-primary-light: #96a882;
+	--color-primary-pale: #fbfff7;
+	--color-primary-dark: #20241d;
+}
+
+/* ----------------- Header ----------------- */
+
+.masthead {
+	background-color: var(--color-primary);
+	color: #fff;
+	text-align: center;
+	width: 100%;
+	padding: 1rem;
+	position: fixed;
+	z-index: 10000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  gap: 1.5rem;
+}
+
+/* --------- Main --------- */
+
+main{
+	padding-top: 7rem;
+	position: relative;
+	max-width: 90vw;
+	margin: 0 auto;
+}
+
+/* --------- Search Area --------- */
+
+.searchArea {
+	text-align: center;
+}
+
+#searchForm {
+	min-width: 23em;
+	padding: 0.5rem;
+	margin: 0 auto;
+	border-radius: 0.5rem;
+	box-shadow: 0 4px 10px var(--color-primary-dark);
+	border: 1px solid #ddd;
+	display: inline-block;
+  background-color: #fff;
+}
+
+#searchForm #inputSearch{
+	border-color: transparent;
+	font-size: 1.5rem;
+	color: var(--color-primary-dark);
+}
+
+.screen-reader-text{
+	position: absolute;
+	clip-path: polygon(0 0, 0.1% 0, 0.1% 0.1%, 0.1% 0);
+}
+
+#searchForm #btnSearch,
+#searchForm #btnClose{
+	background-color: transparent;
+	border-color: transparent;
+	color: var(--color-primary-dark);
+	padding: 0;
+}
+
+#inputSearch:focus{
+	outline: none;
+	background-color: var(--color-primary-light);
+}
+
+#searchForm #btnSearch .material-icons,
+#searchForm #btnClose .material-icons{
+	font-size: 2rem;
+}
+
+#home{
+  background-color: var(--color-primary-pale);
+}
