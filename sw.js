@@ -11,6 +11,12 @@ const cacheList = [
 	"/css/main.css",
 	"/js/app.js",
 	"/manifest.json",
+    "/img/android-chrome-192x192.png",
+    "/img/android-chrome-512x512.png",
+    "/img/apple-touch-icon.png",
+    "/img/favicon-16x16.png",
+    "/img/favicon-32x32.png",
+    "/img/mstile-150x150.png",
 	"/img/placeholder.png",
     "https://fonts.googleapis.com/icon?family=Material+Icons",
     "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
