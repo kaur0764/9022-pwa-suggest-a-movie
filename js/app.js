@@ -22,13 +22,13 @@ const APP = {
 				APP.sw = registration.active;
 			});
 		}
-		
+
 		APP.pageSpecific();
 		APP.addListeners();
 	},
 	addListeners: () => {
 		//add listeners
-
+    document.addEventListener("submit", SEARCH.searchFormSubmitted);
 	},
 	pageSpecific: () => {
 		if (document.body.id === "home") {
@@ -50,12 +50,23 @@ const APP = {
 	},
 	navigate: (url) => {
 		//change the current page
-	},
+		window.location = url; 
+		window.onload = (event) => {
+			console.log("page is fully loaded");
+			APP.pageSpecific();
+		};
+	}
 };
 
 const SEARCH = {
 	searchFormSubmitted(ev) {
 		ev.preventDefault();
+		//get the keyword from the input
+		let searchInput = document.getElementById("inputSearch").value;
+		if (searchInput) {
+			searchInput = searchInput.toLowerCase()
+			APP.navigate(`/results.html?keyword=${searchInput}`);
+		}
 	},
 	btnSearchClicked: () => {
 	}
