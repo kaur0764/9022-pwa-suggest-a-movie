@@ -1,4 +1,4 @@
-const version = 1;
+const version = 3;
 const staticCache = `PWA-Static-Movie-APP-${version}`;
 const dynamicCache = `PWA-Dynamic-Movie-APP-${version}`;
 const cacheLimit = 100;

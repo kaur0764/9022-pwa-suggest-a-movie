@@ -176,6 +176,18 @@ const RESULT = {
 			})
 			.then((contents) => {
 				let results = contents.results;
+				if(results.length === 0){
+					let titleArea = document.querySelector(".titleArea h2");
+					console.log(titleArea);
+					titleArea.innerHTML = `<h2>No matches for <span>'${APP.keyword}'<span></h2>`
+				} else {
+				let newResults = results.map(item =>{ 
+					let {id, title, poster_path, overview, release_date, popularity}= item;
+					return {id, title, poster_path, overview, release_date, popularity};
+				})
+				APP.results = newResults;
+				if(typeof callback === 'function') callback();
+				}
 			})
 			.catch((err) => {
 				//handle the NetworkError
@@ -183,6 +195,13 @@ const RESULT = {
 			});
 	},
 	getSearchResults: () => {
+		if (APP.isONLINE) {
+			//if no match in DB do a fetch;
+			let endpoint = `search/movie?api_key=${APP.tmdbAPIKEY}&query=${APP.keyword}`;
+			RESULT.getData(endpoint, RESULT.addSearchResults);
+		} else {
+			APP.navigate("/404.html");
+		}
 	},
 	getSuggestedResults: () => {
 	},
