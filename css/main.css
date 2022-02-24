@@ -206,7 +206,7 @@ main{
   background-color: var(--color-primary-pale);
 }
 
-/* ---- Title Area ---- */
+/* ----------- Title Area ---------- */
 
 h2 {
 	color: var(--color-primary);
@@ -215,3 +215,67 @@ h2 {
 p {
 	color: var(--color-primary-dark);
 }
+
+.titleArea h2 span {
+	color: var(--color-primary-dark);
+}
+
+/* -------- Content area --------- */
+
+.contentArea {
+	display: grid;
+	gap: 1.5rem;
+}
+
+.contentArea .card {
+	text-align: center;
+	border-radius: 10px;
+	background-image: linear-gradient(to top, var(--color-primary-light),var(--color-primary-pale));
+	overflow: hidden;
+	position: relative;
+	cursor: pointer;
+}
+
+.card img {
+	max-height: 600px;
+}
+
+.card-body {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: calc(100% - 3rem);
+	transition: top 0.4s linear;
+	color: var(--color-primary-darker);
+	background-image: linear-gradient(to bottom,var(--color-primary-light),var(--color-primary-pale));
+}
+
+.card-body:hover {
+	top: 0;
+}
+
+.card-body h2 {
+	margin: 0;
+}
+
+@media all and (min-width: 28em) {
+	.card img {
+		max-height: 700px;
+	}
+}
+
+@media all and (min-width: 40em) {
+	.contentArea {
+		grid-template-columns: 1fr 1fr;
+	}
+	.card img {
+		max-height: 600px;
+	}
+}
+
+@media all and (min-width: 65em) {
+	.contentArea {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+}
+
