@@ -252,6 +252,11 @@ const RESULT = {
 		}
 	},
 	addSuggestedResults: () => {
+		let obj = {
+			movieid: APP.id,
+			results: APP.results,
+		};
+		IDB.addResultsToDB(obj, "suggestStore",	CARDS.displayCards);
 	},
 };
 
