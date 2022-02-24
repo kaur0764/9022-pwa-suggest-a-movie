@@ -29,6 +29,9 @@ const APP = {
 	addListeners: () => {
 		//add listeners
     document.addEventListener("submit", SEARCH.searchFormSubmitted);
+		//when online and offline
+		window.addEventListener("online", APP.changeOnlineStatus);
+		window.addEventListener("offline", APP.changeOnlineStatus);
 	},
 	pageSpecific: () => {
 		if (document.body.id === "home") {
@@ -57,6 +60,10 @@ const APP = {
 	},
 	changeOnlineStatus: (ev) => {
 		//when the browser goes online or offline
+		APP.isONLINE = ev.type === "online" ? true : false;
+		navigator.serviceWorker.ready.then((registration) => {
+			registration.active.postMessage({ ONLINE: APP.isONLINE });
+		});
 	},
 	navigate: (url) => {
 		//change the current page
