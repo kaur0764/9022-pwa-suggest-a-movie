@@ -58,6 +58,14 @@ const APP = {
 		}
 		if (document.body.id === "suggest") {
 			//on the suggest page
+			let movieid = location.search.split("&")[0].split("=")[1];
+			APP.id = movieid;
+			let title = decodeURIComponent(location.search.split("&")[1].split("=")[1]);
+			let titleArea = document.querySelector(".titleArea h2");
+			titleArea.innerHTML = `Suggested Results based on <span>'${title}'<span>`;
+			//listener for clicking on the movie card container
+			document.querySelector(".contentArea").addEventListener("click", CARDS.cardListClicked);
+			IDB.getDBResults("suggestStore", movieid, RESULT.getSuggestedResults);
 		}
 		if (document.body.id === "fourohfour") {
 			//on the 404 page
