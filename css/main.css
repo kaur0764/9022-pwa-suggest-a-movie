@@ -110,6 +110,29 @@ small {
   gap: 1.5rem;
 }
 
+.masthead h1 {
+	margin: 0;
+	cursor: pointer;
+}
+
+#btnSearchHeader {
+	background-color: #fff;
+	border-color: transparent;
+  border-radius: 50px;
+  box-shadow: 0 4px 10px var(--color-primary-dark);
+	color: var(--color-primary-dark);
+	padding: 0;
+	cursor: pointer;
+}
+
+#btnSearchHeader:hover{
+	background-color: #d0dfbf;
+}
+
+#btnSearchHeader .material-icons {
+	font-size: 3rem;
+}
+
 /* --------- Main --------- */
 
 main{
@@ -121,8 +144,19 @@ main{
 
 /* --------- Search Area --------- */
 
-.searchArea {
+.searchArea{
 	text-align: center;
+  display: none;
+  z-index: 1000;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%);
+	transform: translate(-50%, -50%);
+}
+
+.searchArea.active{
+  position:fixed;
+  display: inline-block;
 }
 
 #searchForm {
@@ -142,9 +176,9 @@ main{
 	color: var(--color-primary-dark);
 }
 
-.screen-reader-text{
-	position: absolute;
-	clip-path: polygon(0 0, 0.1% 0, 0.1% 0.1%, 0.1% 0);
+#searchForm #inputSearch:focus{
+	outline: none;
+	background-color: #fff;
 }
 
 #searchForm #btnSearch,
@@ -155,14 +189,14 @@ main{
 	padding: 0;
 }
 
-#inputSearch:focus{
-	outline: none;
-	background-color: var(--color-primary-light);
-}
-
 #searchForm #btnSearch .material-icons,
 #searchForm #btnClose .material-icons{
 	font-size: 2rem;
+}
+
+.screen-reader-text{
+	position: absolute;
+	clip-path: polygon(0 0, 0.1% 0, 0.1% 0.1%, 0.1% 0);
 }
 
 #home{

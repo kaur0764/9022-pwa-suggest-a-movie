@@ -28,7 +28,11 @@ const APP = {
 	},
 	addListeners: () => {
 		//add listeners
+		document.querySelector('h1').addEventListener('click',function(ev){ 
+			APP.navigate("/index.html")
+		})
     document.addEventListener("submit", SEARCH.searchFormSubmitted);
+		document.querySelector("#btnSearchHeader").addEventListener("click", SEARCH.btnSearchClicked);
 		//when online and offline
 		window.addEventListener("online", APP.changeOnlineStatus);
 		window.addEventListener("offline", APP.changeOnlineStatus);
@@ -86,6 +90,14 @@ const SEARCH = {
 		}
 	},
 	btnSearchClicked: () => {
+		let searchArea = document.querySelector(".searchArea");
+		searchArea.classList.add("active");
+		let btnClose = document.querySelector("#btnClose");
+		btnClose.addEventListener("click", SEARCH.removeActive);
+	},
+	removeActive: () => {
+		let searchArea = document.querySelector(".searchArea");
+		searchArea.classList.remove("active");
 	}
 }
 
