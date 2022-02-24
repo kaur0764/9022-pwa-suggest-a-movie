@@ -236,14 +236,20 @@ const RESULT = {
 			APP.navigate("/404.html");
 		}
 	},
-	getSuggestedResults: () => {
-	},
 	addSearchResults: () => {
 		let obj = {
 			keyword: APP.keyword,
 			results: APP.results,
 		};
 		IDB.addResultsToDB(obj, "searchStore",	CARDS.displayCards);
+	},
+	getSuggestedResults: () => {
+		if (APP.isONLINE) {
+			let endpoint = `movie/${APP.id}/similar?api_key=${APP.tmdbAPIKEY}`;
+			RESULT.getData(endpoint, RESULT.addSuggestedResults);
+		} else {
+			APP.navigate("/404.html");
+		}
 	},
 	addSuggestedResults: () => {
 	},
