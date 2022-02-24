@@ -156,6 +156,17 @@ const IDB = {
 	},
 	addResultsToDB: (obj, storeName, callback) => {
 		//save the obj passed in to the appropriate store
+		let tx = IDB.createTransaction(storeName);
+		tx.oncomplete = function () {
+			//done the transaction
+			if(callback)callback();
+		};
+		let movieStore = tx.objectStore(storeName);
+		let addRequest = movieStore.add(obj);
+
+		addRequest.onsuccess = (ev) => {
+			console.log("Movies added to db");
+		};
 	},
 };
 
@@ -206,6 +217,11 @@ const RESULT = {
 	getSuggestedResults: () => {
 	},
 	addSearchResults: () => {
+		let obj = {
+			keyword: APP.keyword,
+			results: APP.results,
+		};
+		IDB.addResultsToDB(obj, "searchStore",	CARDS.displayCards);
 	},
 	addSuggestedResults: () => {
 	},
