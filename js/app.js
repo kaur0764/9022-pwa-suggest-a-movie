@@ -56,7 +56,44 @@ const SEARCH = {
 const IDB = {
 	openDatabase: (nextStep) => {
 		//open the database
+		let version = 1;
+		let dbOpenRequest = indexedDB.open("suggestDB", version);
 
+		dbOpenRequest.onupgradeneeded = function (ev) {
+			DB = ev.target.result;
+			/* deleting the old stores */
+			try {
+				DB.deleteObjectStore("searchStore");
+				DB.deleteObjectStore("suggestStore");
+			} catch (err) {
+				console.log("error deleting old DB because it was the first version");
+			}
+
+			//create searchStore with keyword as keyPath
+			let optionsSearch = {
+				keyPath: "keyword",
+				autoIncrement: false,
+			};
+			let searchStore = DB.createObjectStore("searchStore", optionsSearch);
+
+			//create suggestStore with movieid as keyPath
+			let optionsSuggest = {
+				keyPath: "movieid",
+				autoIncrement: false,
+			};
+			let suggestStore = DB.createObjectStore("suggestStore", optionsSuggest);
+		};
+
+		dbOpenRequest.onerror = function (err) {
+			console.log(err.message);
+		};
+
+		//call nextStep onsuccess
+		dbOpenRequest.onsuccess = function (ev) {
+			DB = dbOpenRequest.result;
+			console.log(DB.name, `ready to be used.`);
+			nextStep();
+		};
 	},
 	createTransaction: (storeName) => {
 		//create a transaction to use for some interaction with the database
