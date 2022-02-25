@@ -28,16 +28,13 @@ const APP = {
 	},
 	addListeners: () => {
 		//add listeners
-		document.querySelector('h1').addEventListener('click',function(ev){ 
-			APP.navigate("/index.html")
-		})
+		document.querySelector('h1').addEventListener('click',function(ev){ APP.navigate("/index.html")})
     document.addEventListener("submit", SEARCH.searchFormSubmitted);
 		document.querySelector("#btnSearchHeader").addEventListener("click", SEARCH.btnSearchClicked);
+		navigator.serviceWorker.addEventListener("message", function(ev){	MESSAGE.messageReceived(ev)});
 		//when online and offline
 		window.addEventListener("online", APP.changeOnlineStatus);
 		window.addEventListener("offline", APP.changeOnlineStatus);
-		//listener for clicking on the movie card container
-		document.querySelector(".contentArea").addEventListener("click", CARDS.cardListClicked);
 	},
 	pageSpecific: () => {
 		if (document.body.id === "home") {
@@ -70,20 +67,22 @@ const APP = {
 		if (document.body.id === "fourohfour") {
 			//on the 404 page
 			console.log("404 PAGE");
+			if (!APP.isONLINE) {
+				let div = document.querySelector(".titleArea div");
+        div.innerHTML = `<p>You are Offline</p>
+				<img src="/img/offline.png" alt="Image showing Offline"></img>`;
+				}
 		}
 	},
 	changeOnlineStatus: (ev) => {
 		//when the browser goes online or offline
 		APP.isONLINE = ev.type === "online" ? true : false;
-		navigator.serviceWorker.ready.then((registration) => {
-			registration.active.postMessage({ ONLINE: APP.isONLINE });
-		});
+    MESSAGE.sendMessage({ ONLINE: APP.isONLINE });
 	},
 	navigate: (url) => {
 		//change the current page
 		window.location = url; 
 		window.onload = (event) => {
-			console.log("page is fully loaded");
 			APP.pageSpecific();
 		};
 	}
@@ -225,6 +224,7 @@ const RESULT = {
 			.catch((err) => {
 				//handle the NetworkError
 				console.warn(err.message);
+				MESSAGE.sendMessage({ checkOnline: APP.isONLINE });
 			});
 	},
 	getSearchResults: () => {
@@ -244,7 +244,8 @@ const RESULT = {
 		IDB.addResultsToDB(obj, "searchStore",	CARDS.displayCards);
 	},
 	getSuggestedResults: () => {
-		if (APP.isONLINE) {
+		if (APP.isONLINE) {	
+			//if no match in DB do a fetch;
 			let endpoint = `movie/${APP.id}/similar?api_key=${APP.tmdbAPIKEY}`;
 			RESULT.getData(endpoint, RESULT.addSuggestedResults);
 		} else {
@@ -303,8 +304,14 @@ const CARDS = {
 };
 
 const MESSAGE = {
-	messageReceived: (ev) => {
-    console.log(ev.data);
+	messageReceived: ({data}) => {
+		//received message from service worker
+		if ('isOnline' in data) {
+			APP.isOnline = data.isOnline;
+			if (!APP.isOnline) {
+				APP.navigate("/404.html");
+			}
+		}
 	},
 	sendMessage: (msg) => {
 		//send a message to the service worker
