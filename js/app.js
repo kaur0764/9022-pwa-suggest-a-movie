@@ -308,6 +308,9 @@ const MESSAGE = {
 	},
 	sendMessage: (msg) => {
 		//send a message to the service worker
+		navigator.serviceWorker.ready.then((registration) => {
+      registration.active.postMessage(msg);
+    });
 	},
 };
 

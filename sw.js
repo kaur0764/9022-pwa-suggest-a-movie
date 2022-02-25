@@ -75,6 +75,13 @@ self.addEventListener("fetch", (ev) => {
 	);
 });
 
+self.addEventListener("message", (ev) => {
+	//check ev.data to get the message
+	if (ev.data.ONLINE) {
+		isOnline = ev.data.ONLINE;
+	}
+});
+
 function sendMessage(msg) {
 	//send a message to the browser from the service worker
 	self.clients.matchAll().then(function (clients) {
