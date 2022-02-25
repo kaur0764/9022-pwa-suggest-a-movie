@@ -114,7 +114,7 @@ const SEARCH = {
 const IDB = {
 	openDatabase: (nextStep) => {
 		//open the database
-		let version = 1;
+		let version = 2;
 		let dbOpenRequest = indexedDB.open("suggestDB", version);
 
 		dbOpenRequest.onupgradeneeded = function (ev) {
