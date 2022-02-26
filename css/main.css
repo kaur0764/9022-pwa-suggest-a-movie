@@ -289,18 +289,41 @@ p {
 	width: 100%;
 	height: 100%;
 	position: absolute;
-	top: calc(100% - 3rem);
+	top: calc(100% - 6rem);
 	transition: top 0.4s linear;
 	color: var(--color-primary-darker);
 	background-image: linear-gradient(to bottom,var(--color-primary-light),var(--color-primary-pale));
 }
 
-.card-body:hover {
+.card-body.expand{
 	top: 0;
 }
 
-.card-body h2 {
+.card-body h2{
 	margin: 0;
+}
+
+.card-body .btnExpand{
+	position: absolute;
+	top: -1rem;
+	right:0;
+	background-color: rgba(238, 238, 238, 0.508);
+	border-color: transparent;
+	border-radius: 50px;
+	color: var(--color-primary-pale);
+	padding: 0;
+}
+
+.card-body.expand .btnExpand{
+	top: 1rem;
+}
+
+.card-body .btnExpand .material-icons{
+	font-size: 2rem;
+}
+
+.card-body .btnExpand:hover{
+	color: var(--color-primary-dark);
 }
 
 @media all and (min-width: 40em) {

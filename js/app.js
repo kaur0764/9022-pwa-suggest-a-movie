@@ -293,11 +293,24 @@ const RESULT = {
 const CARDS = {
 	cardListClicked: (ev) => {
 		// user clicked on a movie card
-		let card = ev.target.closest(".card");
-		let movieid = card.dataset.id;
-		APP.id = movieid;
-		let title = card.querySelector("h3").innerHTML;
-		APP.navigate(`/suggest.html?movie_id=${movieid}&title=${title}`);
+		let btnExpand = ev.target.closest(".btnExpand")
+		if(btnExpand){
+			// button to expand card body clicked
+			let span =ev.target.closest("span")
+			let cardBody =  ev.target.closest(".card-body");
+			cardBody.classList.toggle('expand');
+			if(cardBody.classList.contains('expand')){
+        span.innerHTML='expand_more';
+			} else {
+				span.innerHTML='expand_less';
+			}
+		} else {
+			let card = ev.target.closest(".card");
+		  let movieid = card.dataset.id;
+		  APP.id = movieid;
+		  let title = card.querySelector("h3").innerHTML;
+		  APP.navigate(`/suggest.html?movie_id=${movieid}&title=${title}`);
+		}
 	},
 	displayCards: () => {
 		//display all the movie cards based on the results array
@@ -321,7 +334,10 @@ const CARDS = {
 			card.innerHTML = `<img src=${imgSrc} alt="Poster for movie ${title}"></img>`;
 			let cardBody = document.createElement("div");
 			cardBody.classList.add("card-body");
-			cardBody.innerHTML = `<h3>${title}</h3>
+			cardBody.innerHTML = `<button class="btnExpand" type="button">
+			                    <span class="material-icons">expand_less</span>
+			                    </button>
+	                        <h3>${title}</h3>
                           <p>${releaseDate}</p>
                           <p>Popularity: ${popularity}</p>
                           <p>${overview}</p>`;
