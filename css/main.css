@@ -205,6 +205,16 @@ main{
 	clip-path: polygon(0 0, 0.1% 0, 0.1% 0.1%, 0.1% 0);
 }
 
+input.hide-clear[type=search]::-ms-clear,
+input.hide-clear[type=search]::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0; 
+}
+input[type="search"]::-webkit-search-cancel-button{
+  -webkit-appearance:none;
+}
+
 /* --------- Home and 404 --------- */
 
 #home,
