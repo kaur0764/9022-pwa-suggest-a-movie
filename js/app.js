@@ -39,15 +39,15 @@ const APP = {
 	pageSpecific: () => {
 		if (document.body.id === "home") {
 			//on the home page
+			IDB.getAllSearchResults();
 		}
 		if (document.body.id === "results") {
 			//on the results page
-			let keyword = location.search.split("=")[1];
+			let keyword = decodeURIComponent(location.search.split("=")[1]);
 			APP.keyword = keyword;
 			let titleArea = document.querySelector(".titleArea h2");
 			titleArea.innerHTML = `Search Results for <span>'${keyword}'<span>`;
 			IDB.getDBResults("searchStore", keyword, RESULT.getSearchResults);
-
 			//listener for clicking on the movie card container
 			document
 				.querySelector(".contentArea")
@@ -69,9 +69,10 @@ const APP = {
 			console.log("404 PAGE");
 			if (!APP.isONLINE) {
 				let div = document.querySelector(".titleArea div");
-        div.innerHTML = `<p>You are Offline</p>
+        div.innerHTML = `<h3>Oops! You are Offline</h3>
 				<img src="/img/offline.png" alt="Image showing Offline"></img>`;
-				}
+			}
+				IDB.getAllSearchResults();
 		}
 	},
 	changeOnlineStatus: (ev) => {
@@ -157,6 +158,32 @@ const IDB = {
 		let tx;
 		tx = DB.transaction(storeName, "readwrite");
 		return tx;
+	},
+	getAllSearchResults: () => {
+			//return the results from storeName where it matches keyValue
+			let tx = IDB.createTransaction("searchStore");
+			tx.oncomplete = function () {
+				//done the transaction
+			};
+			let store = tx.objectStore("searchStore");
+			let getRequest = store.getAll();
+			getRequest.onsuccess = function (ev) {
+				results = getRequest.result;
+					let ul = document.querySelector('.contentArea ul');
+					let html = results.map( (result)=> {
+					let li = document.createElement('li');
+					li.innerHTML=`${decodeURIComponent(result.keyword)}`;
+					return li;
+					})
+					ul.append(...html);	
+					ul.addEventListener('click',function(ev){	
+						let li = ev.target.closest('li');	
+					  APP.navigate(`/results.html?keyword=${li.innerHTML}`)
+					});
+					if(html.length == 0){
+						document.querySelector('.contentArea h4').innerHTML="";
+					}
+		}
 	},
 	getDBResults: (storeName, keyValue, callback) => {
 		//return the results from storeName where it matches keyValue

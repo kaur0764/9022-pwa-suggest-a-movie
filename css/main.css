@@ -205,17 +205,45 @@ main{
 	clip-path: polygon(0 0, 0.1% 0, 0.1% 0.1%, 0.1% 0);
 }
 
-/* --------- Page Specific --------- */
+/* --------- Home and 404 --------- */
 
-/* ----- Home page ----- */
-#home{
+#home,
+#fourohfour{
   background-color: var(--color-primary-pale);
+}
+
+#home .titleArea h2,
+#fourohfour .titleArea h2{
+	color: var(--color-primary-dark);
+}
+
+	h4{
+	color: var(--color-primary);
+}
+
+.contentArea ul{
+	padding: 0;
+}
+
+.contentArea li{
+	color: var(--color-primary);
+	text-decoration: underline;
+	cursor: pointer;
+	width:fit-content;
+}
+
+.contentArea li:hover{
+	color: var(--color-primary-light);
 }
 
 /* ----------- Title Area ---------- */
 
 h2 {
 	color: var(--color-primary);
+}
+
+h3{
+	color: var(--color-primary-dark);
 }
 
 p {
@@ -228,7 +256,8 @@ p {
 
 /* -------- Content area --------- */
 
-.contentArea {
+#results .contentArea,
+#suggest .contentArea{
 	display: grid;
 	gap: 1.5rem;
 }

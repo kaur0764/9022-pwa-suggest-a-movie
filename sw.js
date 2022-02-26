@@ -1,4 +1,4 @@
-const version = 3;
+const version = 4;
 let isOnline = true;
 const staticCache = `PWA-Static-Movie-APP-${version}`;
 const dynamicCache = `PWA-Dynamic-Movie-APP-${version}`;
