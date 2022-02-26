@@ -282,7 +282,7 @@ p {
 }
 
 .card img {
-	max-height: 600px;
+	max-width: calc(90vw);
 }
 
 .card-body {
@@ -303,24 +303,21 @@ p {
 	margin: 0;
 }
 
-@media all and (min-width: 28em) {
-	.card img {
-		max-height: 700px;
-	}
-}
-
 @media all and (min-width: 40em) {
 	.contentArea {
 		grid-template-columns: 1fr 1fr;
 	}
 	.card img {
-		max-height: 600px;
+		max-width: calc(90vw/2);
 	}
 }
 
 @media all and (min-width: 65em) {
 	.contentArea {
 		grid-template-columns: 1fr 1fr 1fr;
+	}
+	.card img {
+		max-width: calc(90vw/3);
 	}
 }
 
