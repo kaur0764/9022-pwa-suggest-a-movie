@@ -101,7 +101,9 @@ const SEARCH = {
 	},
 	btnSearchClicked: () => {
 		let searchArea = document.querySelector(".searchArea");
-		searchArea.classList.add("active");
+		searchArea.classList.toggle("active");
+		let input = document.getElementById("inputSearch");
+		input.focus()
 		let btnClose = document.querySelector("#btnClose");
 		btnClose.addEventListener("click", SEARCH.removeActive);
 	},
