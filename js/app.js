@@ -101,15 +101,23 @@ const SEARCH = {
 	},
 	btnSearchClicked: () => {
 		let searchArea = document.querySelector(".searchArea");
-		searchArea.classList.toggle("active");
+		searchArea.classList.add("active");
+		let searchOverlay = document.querySelector(".overlay");
+		searchOverlay.classList.add("active");
+		searchOverlay.addEventListener('click', SEARCH.removeActive)
 		let input = document.getElementById("inputSearch");
 		input.focus()
 		let btnClose = document.querySelector("#btnClose");
 		btnClose.addEventListener("click", SEARCH.removeActive);
 	},
-	removeActive: () => {
-		let searchArea = document.querySelector(".searchArea");
-		searchArea.classList.remove("active");
+	removeActive: (ev) => {
+		let target = ev.target
+		if(target.id!='inputSearch'){
+		  let searchArea = document.querySelector(".searchArea");
+		  searchArea.classList.remove("active");
+		  let searchOverlay = document.querySelector(".overlay");
+		  searchOverlay.classList.remove("active");
+		}
 	}
 }
 
